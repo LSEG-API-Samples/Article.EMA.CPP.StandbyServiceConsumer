@@ -115,7 +115,7 @@ void SessionManager::handleEvent()
 		primaryConsumer.ommConsumer->reissue(ReqMsg().domainType(MMT_LOGIN).initialImage(false).interestAfterRefresh(true).name("user"), primaryConsumer.loginHandle);
 	}
 	//failover to backup Consumer
-	else if (primaryConsumer.isServiceUp == false && isActive(&primaryConsumer))
+	else if ((primaryConsumer.isServiceUp == false && backupConsumer.isServiceUp == true) && isActive(&primaryConsumer))
 	{
 		cout << "Failover to backup Consumer" << endl;
 		//Pause Primary's stream and resume Backup's Stream
@@ -182,11 +182,12 @@ void SessionManager::onStatusMsg( const StatusMsg& statusMsg, const OmmConsumerE
 		primaryConsumer.isInitialized = true;
 	else
 		backupConsumer.isInitialized = true;
-
+	cout << endl << "OnStatus received." << endl;
 	if (primaryConsumer.isInitialized && backupConsumer.isInitialized)
 	{
 		if (statusMsg.getDomainType() == MMT_LOGIN)
 		{
+			cout << "Login status received." << endl;
 			decodeLoginState(statusMsg.getState(), (ConsumerSessionInfo *)ommEvent.getClosure());
 
 			if (activeConsumer != 0)

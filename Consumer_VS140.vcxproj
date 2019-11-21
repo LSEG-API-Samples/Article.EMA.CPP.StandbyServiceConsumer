@@ -104,8 +104,9 @@
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>IF NOT EXIST "$(TargetDir)EmaConfig.xml" ( copy "$(ProjectDir)\EmaConfig.xml" "$(TargetDir)" )
+IF NOT EXIST "$(TargetDir)RDMFieldDictionary" ( copy "$(EmaInstall)\Cpp-C\etc\RDMFieldDictionary" "$(TargetDir)" )
+IF NOT EXIST "$(TargetDir)enumtype.def" ( copy "$(EmaInstall)\Cpp-C\etc\enumtype.def" "$(TargetDir)" )</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug MDd|x64'">
@@ -149,8 +150,9 @@
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>IF NOT EXIST "$(TargetDir)EmaConfig.xml" ( copy "$(ProjectDir)\EmaConfig.xml" "$(TargetDir)" )
+IF NOT EXIST "$(TargetDir)RDMFieldDictionary" ( copy "$(EmaInstall)\Cpp-C\etc\RDMFieldDictionary" "$(TargetDir)" )
+IF NOT EXIST "$(TargetDir)enumtype.def" ( copy "$(EmaInstall)\Cpp-C\etc\enumtype.def" "$(TargetDir)" )</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -162,7 +164,6 @@
     <ClInclude Include="SessionManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt" />
     <None Include="EmaConfig.xml" />
   </ItemGroup>
   <ItemGroup>
