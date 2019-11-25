@@ -182,12 +182,11 @@ void SessionManager::onStatusMsg( const StatusMsg& statusMsg, const OmmConsumerE
 		primaryConsumer.isInitialized = true;
 	else
 		backupConsumer.isInitialized = true;
-	cout << endl << "OnStatus received." << endl;
+	
 	if (primaryConsumer.isInitialized && backupConsumer.isInitialized)
 	{
 		if (statusMsg.getDomainType() == MMT_LOGIN)
 		{
-			cout << "Login status received." << endl;
 			decodeLoginState(statusMsg.getState(), (ConsumerSessionInfo *)ommEvent.getClosure());
 
 			if (activeConsumer != 0)
