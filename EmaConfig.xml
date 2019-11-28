@@ -30,7 +30,7 @@
 			
 			<!-- ChannelSet specifies an ordered list of Channels to which OmmConsumer will attempt to	-->
 			<!-- connect, one at a time, if the previous one fails to connect							-->
-			<ChannelSet value="Channel_2"/>
+			<Channel value="Channel_2"/>
 			
 			<!-- Logger is optional: defaulted to "File + Success"										-->
 			<Logger value="Logger_1"/>
