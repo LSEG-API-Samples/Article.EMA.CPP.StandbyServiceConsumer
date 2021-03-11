@@ -7,8 +7,8 @@
 
 #include "SessionManager.h"
 
-using namespace thomsonreuters::ema::access;
-using namespace thomsonreuters::ema::rdm;
+using namespace refinitiv::ema::access;
+using namespace refinitiv::ema::rdm;
 using namespace std;
 
 void SessionManager::defineActiveConsumer()
@@ -135,7 +135,7 @@ void SessionManager::onRefreshMsg( const RefreshMsg& refreshMsg, const OmmConsum
 	{
 		if (refreshMsg.getDomainType() == MMT_DIRECTORY)
 		{
-			decodeDirectory(refreshMsg, (ConsumerSessionInfo *)ommEvent.getClosure());
+			decodeDirectory(refreshMsg, (ConsumerInstanceInfo *)ommEvent.getClosure());
 
 			if (primaryConsumer.isInitialized && backupConsumer.isInitialized)
 			{
@@ -158,7 +158,7 @@ void SessionManager::onUpdateMsg( const UpdateMsg& updateMsg, const OmmConsumerE
 	{
 		if (updateMsg.getDomainType() == MMT_DIRECTORY)
 		{
-			decodeDirectory(updateMsg, (ConsumerSessionInfo *)ommEvent.getClosure());
+			decodeDirectory(updateMsg, (ConsumerInstanceInfo *)ommEvent.getClosure());
 
 			if (primaryConsumer.isInitialized && backupConsumer.isInitialized)
 			{
@@ -187,7 +187,7 @@ void SessionManager::onStatusMsg( const StatusMsg& statusMsg, const OmmConsumerE
 	{
 		if (statusMsg.getDomainType() == MMT_LOGIN)
 		{
-			decodeLoginState(statusMsg.getState(), (ConsumerSessionInfo *)ommEvent.getClosure());
+			decodeLoginState(statusMsg.getState(), (ConsumerInstanceInfo *)ommEvent.getClosure());
 
 			if (activeConsumer != 0)
 				cout << endl << "active consumer: " << activeConsumer->ommConsumer->getConsumerName() << endl;
@@ -201,7 +201,7 @@ void SessionManager::onStatusMsg( const StatusMsg& statusMsg, const OmmConsumerE
 	}
 }
 
-void SessionManager::decodeLoginState(const OmmState& state, ConsumerSessionInfo* info)
+void SessionManager::decodeLoginState(const OmmState& state, ConsumerInstanceInfo* info)
 {
 	if (state.getStreamState() == OmmState::OpenEnum)
 	{
@@ -229,7 +229,7 @@ void SessionManager::decodeDirectory( const Msg& msg, ConsumerSessionInfo* info 
 					{
 						const FilterEntry& fe = ftl.getEntry();
 						//Decode "SERVICE_STATE_FILTER" Filter Entry.
-						if (fe.getFilterId() == thomsonreuters::ema::rdm::SERVICE_STATE_FILTER)
+						if (fe.getFilterId() == refinitiv::ema::rdm::SERVICE_STATE_FILTER)
 						{
 							//Get Element List from the Filter Entry.
 							const ElementList& el = fe.getElementList();
@@ -238,7 +238,7 @@ void SessionManager::decodeDirectory( const Msg& msg, ConsumerSessionInfo* info 
 								const ElementEntry& ee = el.getEntry();
 								EmaString name = ee.getName();
 								//Decode "ServiceState" Element Entry
-								if (name == thomsonreuters::ema::rdm::ENAME_SVC_STATE)
+								if (name == refinitiv::ema::rdm::ENAME_SVC_STATE)
 									serviceState = ee.getUInt() == 1 ? true : false;
 								//if (name == thomsonreuters::ema::rdm::ENAME_ACCEPTING_REQS)
 								//	acceptingReq = ee.getUInt() == 1 ? true : false;

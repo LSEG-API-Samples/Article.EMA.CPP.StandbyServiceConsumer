@@ -11,53 +11,53 @@
 #include <sys/time.h>
 #endif
 
-struct ConsumerSessionInfo {
-	thomsonreuters::ema::access::OmmConsumer* ommConsumer;
-	thomsonreuters::ema::access::UInt64 loginHandle;
-	thomsonreuters::ema::access::UInt64 dirHandle;
+struct ConsumerInstanceInfo {
+	refinitiv::ema::access::OmmConsumer* ommConsumer;
+	refinitiv::ema::access::UInt64 loginHandle;
+	refinitiv::ema::access::UInt64 dirHandle;
 	bool isServiceUp;
 	bool isInitialized;
 
 };
 
 // application defined client class for receiving and processing of item messages
-class SessionManager : public thomsonreuters::ema::access::OmmConsumerClient
+class SessionManager : public refinitiv::ema::access::OmmConsumerClient
 {
 public:
 
 	SessionManager();
-	void create(thomsonreuters::ema::access::OmmConsumer&, thomsonreuters::ema::access::OmmConsumer&,thomsonreuters::ema::access::EmaString);
+	void create(refinitiv::ema::access::OmmConsumer&, refinitiv::ema::access::OmmConsumer&, refinitiv::ema::access::EmaString);
 
-	void decodeLoginState(const thomsonreuters::ema::access::OmmState&, ConsumerSessionInfo*);
-	void decodeDirectory(const thomsonreuters::ema::access::Msg&, ConsumerSessionInfo*);
+	void decodeLoginState(const refinitiv::ema::access::OmmState&, ConsumerInstanceInfo*);
+	void decodeDirectory(const refinitiv::ema::access::Msg&, ConsumerInstanceInfo*);
 
-	void setMainOmmConsumer(thomsonreuters::ema::access::OmmConsumer&);
-	void setBackupOmmConsumer(thomsonreuters::ema::access::OmmConsumer&);
+	void setMainOmmConsumer(refinitiv::ema::access::OmmConsumer&);
+	void setBackupOmmConsumer(refinitiv::ema::access::OmmConsumer&);
 	
-	thomsonreuters::ema::access::UInt64 registerClient(thomsonreuters::ema::access::ReqMsg&, thomsonreuters::ema::access::OmmConsumerClient&, void* closure = 0);
+	refinitiv::ema::access::UInt64 registerClient(refinitiv::ema::access::ReqMsg&, refinitiv::ema::access::OmmConsumerClient&, void* closure = 0);
 
-	bool isActive(ConsumerSessionInfo* consumerSession) { return consumerSession == activeConsumer; };
+	bool isActive(ConsumerInstanceInfo* consumerSession) { return consumerSession == activeConsumer; };
 
 protected:
 
-	void onRefreshMsg(const thomsonreuters::ema::access::RefreshMsg&, const thomsonreuters::ema::access::OmmConsumerEvent&);
+	void onRefreshMsg(const refinitiv::ema::access::RefreshMsg&, const refinitiv::ema::access::OmmConsumerEvent&);
 
-	void onUpdateMsg(const thomsonreuters::ema::access::UpdateMsg&, const thomsonreuters::ema::access::OmmConsumerEvent&);
+	void onUpdateMsg(const refinitiv::ema::access::UpdateMsg&, const refinitiv::ema::access::OmmConsumerEvent&);
 
-	void onStatusMsg(const thomsonreuters::ema::access::StatusMsg&, const thomsonreuters::ema::access::OmmConsumerEvent&);
+	void onStatusMsg(const refinitiv::ema::access::StatusMsg&, const refinitiv::ema::access::OmmConsumerEvent&);
 
 	void defineActiveConsumer();
 	void handleEvent();
 
-	ConsumerSessionInfo primaryConsumer;
-	ConsumerSessionInfo backupConsumer;
+	ConsumerInstanceInfo primaryConsumer;
+	ConsumerInstanceInfo backupConsumer;
 
-	ConsumerSessionInfo* activeConsumer;
-	ConsumerSessionInfo* inactiveConsumer;
+	ConsumerInstanceInfo* activeConsumer;
+	ConsumerInstanceInfo* inactiveConsumer;
 
-	thomsonreuters::ema::access::EmaString _serviceName;
+	refinitiv::ema::access::EmaString _serviceName;
 
-	typedef std::map<thomsonreuters::ema::access::UInt64, thomsonreuters::ema::access::UInt64>	ItemHandleList;
+	typedef std::map<refinitiv::ema::access::UInt64, refinitiv::ema::access::UInt64>	ItemHandleList;
 	ItemHandleList itemHandleList;
 };
 

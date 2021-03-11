@@ -89,7 +89,7 @@
       <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>msvcprt.lib;msvcrt.lib;ws2_32.lib;$(EMAInstall)\Cpp-C\Ema\Libs\WIN_64_VS140\Release_MD\libema.lib;$(EMAInstall)\Cpp-C\Eta\Libs\WIN_64_VS140\Release_MD\librsslVA.lib;$(EMAInstall)\Cpp-C\Eta\Libs\WIN_64_VS140\Release_MD\librssl.lib;$(EMAInstall)\installdb\WIN_64_VS140\lib\libxml2.lib;wininet.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>msvcprt.lib;msvcrt.lib;ws2_32.lib;Iphlpapi.lib;$(EMAInstall)\Cpp-C\Ema\Libs\WIN_64_VS140\Release_MD\libema.lib;$(EMAInstall)\Cpp-C\Eta\Libs\WIN_64_VS140\Release_MD\librsslVA.lib;$(EMAInstall)\Cpp-C\Eta\Libs\WIN_64_VS140\Release_MD\librssl.lib;$(EMAInstall)\installdb\WIN_64_VS140\lib\libxml2.lib;wininet.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)Consumer.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -135,7 +135,7 @@ IF NOT EXIST "$(TargetDir)enumtype.def" ( copy "$(EmaInstall)\Cpp-C\etc\enumtype
       <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>msvcprtd.lib;msvcrtd.lib;ws2_32.lib;$(EMAInstall)\Cpp-C\Ema\Libs\WIN_64_VS140\Debug_MDd\libema.lib;$(EMAInstall)\Cpp-C\Eta\Libs\WIN_64_VS140\Debug_MDd\librsslVA.lib;$(EMAInstall)\Cpp-C\Eta\Libs\WIN_64_VS140\Debug_MDd\librssl.lib;$(EMAInstall)\installdb\WIN_64_VS140\lib\libxml2.lib;wininet.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>msvcprtd.lib;msvcrtd.lib;ws2_32.lib;Iphlpapi.lib;$(EMAInstall)\Cpp-C\Ema\Libs\WIN_64_VS140\Debug_MDd\libema.lib;$(EMAInstall)\Cpp-C\Eta\Libs\WIN_64_VS140\Debug_MDd\librsslVA.lib;$(EMAInstall)\Cpp-C\Eta\Libs\WIN_64_VS140\Debug_MDd\librssl.lib;$(EMAInstall)\installdb\WIN_64_VS140\lib\libxml2.lib;wininet.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)Consumer.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
