@@ -210,7 +210,7 @@ void SessionManager::decodeLoginState(const OmmState& state, ConsumerInstanceInf
 	}
 }
 
-void SessionManager::decodeDirectory( const Msg& msg, ConsumerSessionInfo* info )
+void SessionManager::decodeDirectory( const Msg& msg, ConsumerInstanceInfo* info )
 {
 	std::cout << "Received directory" << endl;
 	bool serviceState, acceptingReq = false;
