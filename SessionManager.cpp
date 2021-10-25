@@ -2,7 +2,7 @@
 // *|            This source code is provided under the Apache 2.0 license      --
 // *|  and is provided AS IS with no warranty or guarantee of fit for purpose.  --
 // *|                See the project's LICENSE.md for details.                  --
-// *|           Copyright Thomson Reuters 2015. All rights reserved.            --
+// *|           Copyright Refinitiv 2021. All rights reserved.            --
 ///*|-----------------------------------------------------------------------------
 
 #include "SessionManager.h"
@@ -240,8 +240,7 @@ void SessionManager::decodeDirectory( const Msg& msg, ConsumerInstanceInfo* info
 								//Decode "ServiceState" Element Entry
 								if (name == refinitiv::ema::rdm::ENAME_SVC_STATE)
 									serviceState = ee.getUInt() == 1 ? true : false;
-								//if (name == thomsonreuters::ema::rdm::ENAME_ACCEPTING_REQS)
-								//	acceptingReq = ee.getUInt() == 1 ? true : false;
+								
 								}
 							if (serviceState)
 								info->isServiceUp = true;
